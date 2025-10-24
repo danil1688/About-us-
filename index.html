@@ -1,136 +1,661 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hero Section</title>
-
-  <!-- Bootstrap CSS -->
-  <link 
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" 
-    rel="stylesheet"
-    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" 
-    crossorigin="anonymous">
-
-  <!-- Bootstrap Icons -->
-  <link 
-    rel="stylesheet" 
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Данііл Селіванов | Комп'ютерна інженерія</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d6efd;
+            --secondary: #6c757d;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f8f9fa;
+            --accent: #bb86fc;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            background-color: rgba(18, 18, 18, 0.95) !important;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            padding: 20px 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--accent) !important;
+        }
+        
+        .nav-link {
+            color: var(--light) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent) !important;
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNwYXR0ZXJuKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==');
+        }
+        
+        .hero-content {
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            border-radius: 2px;
+        }
+        
+        .about-section, .skills-section, .projects-section, .contact-section {
+            padding: 100px 0;
+        }
+        
+        .card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress {
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            border-radius: 4px;
+        }
+        
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .footer {
+            background-color: var(--darker);
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 10px;
+            text-align: center;
+            line-height: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            transform: translateY(-5px);
+        }
+        
+        /* Анимации */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .navbar {
+                padding: 10px 0;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <!-- About Us Section -->
-  <section id="about-us" class="container my-5">
-    <div class="row gx-lg-5 align-items-center">
-
-      <!-- Left column (Images) -->
-      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-        <figure class="position-relative">
-          <img src="https://images.pexels.com/photos/3182759/pexels-photo-3182759.jpeg"
-               class="img-fluid rounded-4 shadow-sm"
-               alt="Man working on a laptop">
-
-          <figcaption class="position-absolute top-0 end-0 m-3 bg-white p-2 rounded-3 fw-bold shadow-sm text-center">
-            <span class="d-block fs-5 text-primary">15+</span>
-            <span class="text-secondary small text-uppercase">Years of Experience</span>
-          </figcaption>
-        </figure>
-
-        <!-- Additional images -->
-        <div class="row mt-4 gx-3">
-          <div class="col-6">
-            <img src="https://images.pexels.com/photos/3184302/pexels-photo-3184302.jpeg"
-                 class="img-fluid rounded-4 shadow-sm"
-                 alt="Team discussion">
-          </div>
-          <div class="col-6">
-            <img src="https://images.pexels.com/photos/3182757/pexels-photo-3182757.jpeg"
-                 class="img-fluid rounded-4 shadow-sm"
-                 alt="Office workspace">
-          </div>
+    <!-- Навігація -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Данііл Селіванов</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Про мене</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Навички</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Проєкти</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Контакти</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
+    </nav>
 
-      <!-- Right column (Text content) -->
-      <div class="col-12 col-lg-6">
-        <header class="mb-4">
-          <p class="text-primary fw-bold text-uppercase mb-2">About Our Company</p>
-          <h2 class="display-6 fw-bold">Building Digital Solutions That Empower Your Business</h2>
-        </header>
-
-        <p class="text-secondary mb-4">
-          We are a team of professionals dedicated to delivering innovative software solutions
-          that help businesses grow and succeed in the digital era. Our focus is on quality,
-          creativity, and long-term partnerships.
-        </p>
-
-        <!-- Feature blocks -->
-        <div class="mb-3">
-          <div class="d-flex align-items-start mb-3">
-            <div class="d-flex align-items-center justify-content-center me-3 flex-shrink-0 bg-light rounded-circle" 
-                 style="width:48px; height:48px;">
-              <i class="bi bi-graph-up text-primary fs-5"></i>
+    <!-- Головний екран -->
+    <section class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="hero-title">Данііл Селіванов</h1>
+                    <p class="hero-subtitle">Студент комп'ютерної інженерії</p>
+                    <p class="lead mb-4">Прагну до розвитку в IT-сфері та готовий до нових викликів</p>
+                    <a href="#projects" class="btn btn-primary btn-lg">Мої проєкти</a>
+                </div>
+                <div class="col-lg-6 text-center floating">
+                    <div class="position-relative d-inline-block">
+                        <div class="bg-primary rounded-circle position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.2; transform: scale(1.1);"></div>
+                        <div class="bg-gradient-primary rounded-circle position-relative overflow-hidden" style="width: 300px; height: 300px; background: linear-gradient(135deg, var(--accent), var(--primary));">
+                            <div class="w-100 h-100 d-flex align-items-center justify-content-center text-white">
+                                <i class="fas fa-laptop-code" style="font-size: 8rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-              <h3 class="h5 fw-bold mb-1">Strategic Growth</h3>
-              <p class="text-secondary mb-0">We help our clients scale through data-driven strategies.</p>
-            </div>
-          </div>
-
-          <div class="d-flex align-items-start mb-3">
-            <div class="d-flex align-items-center justify-content-center me-3 flex-shrink-0 bg-light rounded-circle" 
-                 style="width:48px; height:48px;">
-              <i class="bi bi-people text-primary fs-5"></i>
-            </div>
-            <div>
-              <h3 class="h5 fw-bold mb-1">Expert Team</h3>
-              <p class="text-secondary mb-0">Our experienced professionals ensure the best results for every project.</p>
-            </div>
-          </div>
         </div>
+    </section>
 
-        <!-- CTA Button and Phone -->
-        <div class="d-flex flex-column flex-md-row align-items-md-center mt-4">
-          <a href="#" class="btn btn-primary btn-lg rounded-pill px-4 mb-3 mb-md-0 me-md-3">
-            Learn More About Us
-          </a>
-          <div class="d-flex flex-column text-secondary text-center text-md-start">
-            <small>Call us directly:</small>
-            <a href="tel:+15551234567" class="text-dark fw-bold text-decoration-none">+1 (555) 123-4567</a>
-          </div>
+    <!-- Про мене -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title text-center fade-in">Про мене</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card p-4 fade-in">
+                        <div class="row">
+                            <div class="col-md-4 text-center mb-4 mb-md-0">
+                                <div class="bg-gradient-primary rounded-circle overflow-hidden mx-auto" style="width: 200px; height: 200px; background: linear-gradient(135deg, var(--accent), var(--primary));">
+                                    <div class="w-100 h-100 d-flex align-items-center justify-content-center text-white">
+                                        <i class="fas fa-user" style="font-size: 5rem;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h3 class="mb-3">Основна інформація</h3>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><strong>ПІБ:</strong> Селіванов Данііл Олексійович</li>
+                                    <li class="mb-2"><strong>Дата народження:</strong> 21.01.2008</li>
+                                    <li class="mb-2"><strong>Освіта:</strong> Коледж ВіФК НУХТ, 3 курс</li>
+                                    <li class="mb-2"><strong>Спеціальність:</strong> Комп'ютерна інженерія</li>
+                                </ul>
+                                <p class="mt-3">
+                                    Я студент 3 курсу, що вивчає комп'ютерну інженерію. Маю базові знання мов програмування Python, C++, HTML, CSS та JavaScript. 
+                                    Також маю досвід роботи з графічними редакторами Adobe Photoshop, CorelDRAW та Figma.
+                                </p>
+                                <p>
+                                    Добре розумію принципи роботи комп'ютерного обладнання та програмного забезпечення. 
+                                    Вмію налаштовувати, діагностувати та оптимізувати роботу ПК і периферійних пристроїв.
+                                </p>
+                                <p class="fst-italic">
+                                    Завжди готовий працювати над собою та рости в знаннях.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <!-- Statistics -->
-    <div class="row text-center mt-5 pt-5">
-      <h2 class="visually-hidden">Our Achievements and Key Statistics</h2>
+    <!-- Навички -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <h2 class="section-title text-center fade-in">Мої навички</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card p-4 h-100 fade-in">
+                        <h3 class="mb-4"><i class="fas fa-code me-2"></i>Програмування</h3>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Python</span>
+                                <span>Базовий</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>C++</span>
+                                <span>Базовий</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>HTML/CSS</span>
+                                <span>Середній</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>JavaScript</span>
+                                <span>Базовий</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card p-4 h-100 fade-in">
+                        <h3 class="mb-4"><i class="fas fa-tools me-2"></i>Інші навички</h3>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Adobe Photoshop</span>
+                                <span>Середній</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>CorelDRAW</span>
+                                <span>Середній</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Figma</span>
+                                <span>Середній</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Налаштування ПК</span>
+                                <span>Поглиблений</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <article class="col-6 col-md-3 mb-4">
-        <h4 class="display-4 fw-bold text-primary">120+</h4>
-        <p class="text-secondary small">Completed Projects</p>
-      </article>
+    <!-- Проєкти -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2 class="section-title text-center fade-in">Мої проєкти</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card project-card fade-in">
+                        <div class="card-body p-0">
+                            <div class="bg-dark p-4" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-laptop-code text-primary" style="font-size: 4rem;"></i>
+                            </div>
+                            <div class="p-3">
+                                <h5 class="card-title">GitHub профіль</h5>
+                                <p class="card-text">Мій профіль на GitHub з проєктами та вихідним кодом.</p>
+                                <a href="https://github.com/danil1688" target="_blank" class="btn btn-outline-primary">Переглянути</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card project-card fade-in">
+                        <div class="card-body p-0">
+                            <div class="bg-dark p-4" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-hamburger text-primary" style="font-size: 4rem;"></i>
+                            </div>
+                            <div class="p-3">
+                                <h5 class="card-title">Delicious Burgers</h5>
+                                <p class="card-text">Веб-проєкт приклад створений на основі освітніх технологій.</p>
+                                <a href="https://danil1688.github.io/lr5-6/" target="_blank" class="btn btn-outline-primary">Переглянути</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card project-card fade-in">
+                        <div class="card-body p-0">
+                            <div class="bg-dark p-4" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-rocket text-primary" style="font-size: 4rem;"></i>
+                            </div>
+                            <div class="p-3">
+                                <h5 class="card-title">AwesomeProduct</h5>
+                                <p class="card-text">Сайт Build products people love.</p>
+                                <a href="https://danil1688.github.io/lr-3-4/" target="_blank" class="btn btn-outline-primary">Переглянути</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card project-card fade-in">
+                        <div class="card-body p-0">
+                            <div class="bg-dark p-4" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-newspaper text-primary" style="font-size: 4rem;"></i>
+                            </div>
+                            <div class="p-3">
+                                <h5 class="card-title">Daily News</h5>
+                                <p class="card-text">Односторінковий сайт з новинами.</p>
+                                <a href="https://danil1688.github.io/123/" target="_blank" class="btn btn-outline-primary">Переглянути</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card project-card fade-in">
+                        <div class="card-body p-0">
+                            <div class="bg-dark p-4" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-users text-primary" style="font-size: 4rem;"></i>
+                            </div>
+                            <div class="p-3">
+                                <h5 class="card-title">About Us</h5>
+                                <p class="card-text">Макет сторінки про нас.</p>
+                                <a href="https://danil1688.github.io/About-us-/" target="_blank" class="btn btn-outline-primary">Переглянути</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card project-card fade-in">
+                        <div class="card-body p-0">
+                            <div class="bg-dark p-4" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-gamepad text-primary" style="font-size: 4rem;"></i>
+                            </div>
+                            <div class="p-3">
+                                <h5 class="card-title">Devil May Cry 5</h5>
+                                <p class="card-text">Особистий проєкт на конкурс з веб-дизайну.</p>
+                                <a href="https://danil1688.github.io/Devil_May_Cry_5/" target="_blank" class="btn btn-outline-primary">Переглянути</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <article class="col-6 col-md-3 mb-4">
-        <h4 class="display-4 fw-bold text-primary">50+</h4>
-        <p class="text-secondary small">Happy Clients</p>
-      </article>
+    <!-- Контакти -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title text-center fade-in">Контакти</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card p-4 fade-in">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 class="mb-4">Зв'яжіться зі мною</h3>
+                                <div class="contact-info">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Email</h5>
+                                        <p>danil.selivanov@example.com</p>
+                                    </div>
+                                </div>
+                                <div class="contact-info">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Місцезнаходження</h5>
+                                        <p>Україна</p>
+                                    </div>
+                                </div>
+                                <div class="contact-info">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Освіта</h5>
+                                        <p>Коледж ВіФК НУХТ</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="mb-4">Швидкі посилання</h3>
+                                <div class="d-grid gap-2">
+                                    <a href="https://github.com/danil1688" target="_blank" class="btn btn-outline-primary btn-lg">
+                                        <i class="fab fa-github me-2"></i>GitHub
+                                    </a>
+                                    <a href="#projects" class="btn btn-outline-primary btn-lg">
+                                        <i class="fas fa-code me-2"></i>Мої проєкти
+                                    </a>
+                                    <a href="#about" class="btn btn-outline-primary btn-lg">
+                                        <i class="fas fa-user me-2"></i>Про мене
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <article class="col-6 col-md-3 mb-4">
-        <h4 class="display-4 fw-bold text-primary">25</h4>
-        <p class="text-secondary small">Expert Team Members</p>
-      </article>
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links mb-3">
+                <a href="https://github.com/danil1688" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+            <p>&copy; 2023 Данііл Селіванов. Всі права захищені.</p>
+        </div>
+    </footer>
 
-      <article class="col-6 col-md-3 mb-4">
-        <h4 class="display-4 fw-bold text-primary">10</h4>
-        <p class="text-secondary small">Years in the Market</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- Bootstrap JS (optional, for components that need JS) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-pzjw8f+ua7Kw1TIq5dK5WvBf8BBuD1E0Z+YkC6VSlP0CEfOKN8T+4Yf5JxHkpFjR"
-          crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Кастомний JS -->
+    <script>
+        // Анімація появи елементів при скролі
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            // Перевіряємо при завантаженні
+            fadeInOnScroll();
+            
+            // Перевіряємо при скролі
+            window.addEventListener('scroll', fadeInOnScroll);
+            
+            // Плавна прокрутка для навігаційних посилань
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Зміна навігації при скролі
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 100) {
+                    navbar.style.padding = '10px 0';
+                    navbar.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
+                } else {
+                    navbar.style.padding = '20px 0';
+                    navbar.style.boxShadow = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
